@@ -29,6 +29,8 @@ class GetCurrentAppSettingsTool: Tool {
     }
 
     func call(arguments: Arguments) async throws -> String {
+        print("TOOL CALL")
+        print(arguments)
         let currentSettings = getCurrentAppSettings()
         
         switch arguments.setting {

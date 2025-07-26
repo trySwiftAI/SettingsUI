@@ -88,13 +88,7 @@ class SettingsIntelligence {
         _ message: String
     ) async -> String {
         do {
-            print("DEBUG - Tools available: \(languageModelSession.transcript)")
-            let response = try await languageModelSession.respond(to: message)
-            print("DEBUG - Response content: \(response.content)")
-            print("DEBUG - Full transcript after response:")
-            for entry in languageModelSession.transcript {
-                print("  Entry: \(entry)")
-            }
+            let response = try await languageModelSession.respond(to: message, generating: String.self, includeSchemaInPrompt: false)
             return response.content
         } catch LanguageModelSession.GenerationError.exceededContextWindowSize {
             return await recreateSessionAndContinue(with: message)
